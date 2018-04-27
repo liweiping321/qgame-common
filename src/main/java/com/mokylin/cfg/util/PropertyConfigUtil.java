@@ -22,6 +22,7 @@ import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -92,18 +93,28 @@ public class PropertyConfigUtil {
         }
     }
 
-    public static void toBeanObj(Class<?> clazz, Map<?, ?> properties)
-        throws InstantiationException, IllegalAccessException, Exception {
+    public static void toBeanObj(Class<?> clazz, Map<?, ?> properties) throws  Exception {
         // 实例化对象
         Object obj = clazz.newInstance();
-
-        Field[] fields = clazz.getDeclaredFields();
+        toBeanObj(obj,properties);
+    }
+    public static void toBeanObj(Object obj, Map<?, ?> properties)throws Exception {
+        // 实例化对象
+        Field[] fields = obj.getClass().getDeclaredFields();
         if (!ArrayUtils.isEmpty(fields)) {
             for (Field field : fields) {
                 field.setAccessible(true);
+                if(Modifier.isFinal(field.getModifiers())&&!Modifier.isStatic(field.getModifiers())){
+                    Field modifiersField = Field.class.getDeclaredField("modifiers");
+                    modifiersField.setAccessible(true);
+                    modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+                }
             }
         }
         for (Field field : fields) {
+            if(Modifier.isFinal(field.getModifiers())&&Modifier.isStatic(field.getModifiers())){
+                continue;
+            }
             String key = field.getName().toLowerCase();
             if (!properties.containsKey(key)) {
                 LOGGER.warn("{} file   not config property {}", key);
@@ -117,6 +128,7 @@ public class PropertyConfigUtil {
             field.set(obj, valueObj);
         }
     }
+
 
     public static Object getJavaBeanValue(Field field, String value) throws Exception {
         Class<?> fileldType = field.getType();

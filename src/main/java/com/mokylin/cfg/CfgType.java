@@ -6,6 +6,7 @@ import com.mokylin.cfg.anno.CfgField;
 import org.apache.commons.lang.StringUtils;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,6 +45,15 @@ public class CfgType<T extends BaseCfg> {
                 CfgField cfgField = field.getAnnotation(CfgField.class);
                 if (Objects.nonNull(cfgField)) {
                     field.setAccessible(true);
+                    try {
+                        if(Modifier.isFinal(field.getModifiers())&&!Modifier.isStatic(field.getModifiers())){
+                            Field modifiersField = Field.class.getDeclaredField("modifiers");
+                            modifiersField.setAccessible(true);
+                            modifiersField.setInt(field, field.getModifiers() & ~Modifier.FINAL);
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                     String fieldName =
                         StringUtils.isNotEmpty(cfgField.name()) ? cfgField.name() : field.getName();
                     CfgFieldType cfgFieldType = new CfgFieldType(fieldName, cfgField, field);

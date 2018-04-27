@@ -9,7 +9,9 @@ public abstract class BaseCfg<Key, V> {
 
     public abstract Key getKey();
 
-    public abstract GeneratedMessage encode4Config();
+    public  GeneratedMessage encode4Config(){
+        return null;
+    }
 
     public String getName(){
         return "";

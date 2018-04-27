@@ -14,26 +14,22 @@ import java.util.Map;
  */
 public abstract class BaseCfgProviders {
 
-
-    public Object services;
-
     protected Map<String, BaseCfgProvider<?, ?>> cfgProviderMap = new LinkedHashMap<>();
 
     protected Map<Class<? extends BaseCfgProvider>, BaseCfgProvider<?, ?>> clazzProviderMap = new LinkedHashMap<>();
 
-    private GeneratedMessage cacheConfig;
 
     public BaseCfgProviders() {
-
+        init();
     }
 
     protected void register(BaseCfgProvider<?, ?> provider) {
         cfgProviderMap.put(provider.getName(), provider);
-        provider.services=services;
+
     }
 
-    public void init(Object services) {
-        this.services=services;
+    private void init() {
+
         registers();
 
         loadData();
@@ -52,8 +48,6 @@ public abstract class BaseCfgProviders {
         for (BaseCfgProvider<?, ?> provider : cfgProviderMap.values()) {
             provider.printLoadOver();
         }
-
-        cacheConfig = encode4Config();
     }
 
     public void loadData(String names[]) {
@@ -75,28 +69,17 @@ public abstract class BaseCfgProviders {
             }
         }
 
-        cacheConfig = encode4Config();
     }
 
     public <T extends BaseCfgProvider> T getProvider(Class<T> providerClazz){
         return (T)clazzProviderMap.get(providerClazz);
     }
-    public abstract GeneratedMessage.Builder getMessageBuilder();
 
-    public GeneratedMessage getConfigMessage() {
-        if (cacheConfig == null) {
-            cacheConfig = encode4Config();
-        }
-        return cacheConfig;
-    }
 
-    public GeneratedMessage encode4Config() {
-        GeneratedMessage.Builder builder = getMessageBuilder();
+    public void encode4Config( GeneratedMessage.Builder buidler ) {
         for (BaseCfgProvider provider : cfgProviderMap.values()) {
-            provider.encode4Config(builder);
+            provider.encode4Config(buidler);
         }
-        return (GeneratedMessage)builder.build();
-
     }
 
 }
