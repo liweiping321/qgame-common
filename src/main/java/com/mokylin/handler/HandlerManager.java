@@ -66,10 +66,13 @@ public class HandlerManager {
             }
 
             RequestHandler requestHandler = initHandler(clazz, handler);
-            if (handlerMap.put(requestHandler.msgCode, requestHandler) != null) {
+            if(handlerMap.containsKey(requestHandler.msgCode)){
                 throw new IllegalClassFormatException(
-                    "协议号已经被使用：code=" + requestHandler.msgCode + ",handler=" + clazz.getName());
+                        "协议号已经被使用：code=" + requestHandler.msgCode + ",handler1=" + clazz.getName()+",hander2="+handlerMap.get(requestHandler.msgCode).getClass().getName());
+            }else{
+                handlerMap.put(requestHandler.msgCode, requestHandler);
             }
+
         }
     }
 

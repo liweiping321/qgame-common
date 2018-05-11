@@ -184,4 +184,13 @@ public class CfgFieldType {
             fieldType == Short.class || fieldType == Integer.class || fieldType == Long.class ||
             fieldType == Double.class || fieldType == Float.class;
     }
+
+    public <T> T getValue(Class<T> clazz,Object obj)   {
+        try{
+            return  clazz.cast(field.get(obj));
+        }catch (Exception e){
+            throw new RuntimeException(e);
+        }
+
+    }
 }
