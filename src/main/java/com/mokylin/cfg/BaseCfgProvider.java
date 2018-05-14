@@ -40,6 +40,9 @@ public abstract class BaseCfgProvider<Key, V extends BaseCfg<Key, ?>> {
         return mapData.get(key);
     }
 
+    public V get(Key key) {
+        return mapData.get(key);
+    }
 
     @SuppressWarnings("unchecked")
     public void reLoad() {
