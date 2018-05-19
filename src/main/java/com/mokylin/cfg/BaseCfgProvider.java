@@ -122,5 +122,5 @@ public abstract class BaseCfgProvider<Key, V extends BaseCfg<Key, ?>> {
 
     public  void encode4Config(GeneratedMessage.Builder builder){
 
-    };
+    }
 }
