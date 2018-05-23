@@ -32,6 +32,16 @@ public abstract class BaseCfgProvider<Key, V extends BaseCfg<Key, ?>> {
 
     }
 
+    public <T> void   addMultMap(Map<T,Map<Key,V>> multiMap,T t ,V value){
+        Map<Key,V> map= multiMap.get(t);
+        if(map==null){
+            map=new HashMap<>();
+            multiMap.put(t,map);
+        }
+         map.put(value.getKey(),value);
+
+    }
+
     public Collection<V> getConfigDatas() {
         return mapData.values();
     }

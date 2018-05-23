@@ -27,6 +27,8 @@ public class CfgType<T extends BaseCfg> {
 
     private Map<String, CfgFieldType> fieldMap = new HashMap<>();
 
+    public  boolean needConfig;
+
     public CfgType(Class<T> clazz) {
         this.clazz = clazz;
         init();
@@ -39,6 +41,7 @@ public class CfgType<T extends BaseCfg> {
             if (StringUtils.isEmpty(fileName)) {
                 throw new RuntimeException(clazz.getName() + " Cfg fileName is empty!");
             }
+            needConfig=cfg.needConfig();
 
             Field[] fields = clazz.getDeclaredFields();
             for (Field field : fields) {

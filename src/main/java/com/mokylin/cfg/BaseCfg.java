@@ -2,6 +2,8 @@ package com.mokylin.cfg;
 
 import com.google.protobuf.GeneratedMessage;
 
+import com.mokylin.game.utils.config.Config;
+
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
@@ -15,6 +17,8 @@ public abstract class BaseCfg<Key, V> {
     public  Key getKey(){
         return null;
     }
+
+    public Config configValue;
 
     public  GeneratedMessage encode4Config(){
         return null;

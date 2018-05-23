@@ -41,6 +41,10 @@ public class CfgProviderUtil {
             for (CfgFieldType cfgFieldType : cfgFieldTypes) {
                 cfgFieldType.setValue(cfgObj, config, configType);
             }
+
+            if(cfgType.needConfig){
+                cfgObj.configValue=config;
+            }
             cfgs.add(cfgObj);
 
         }

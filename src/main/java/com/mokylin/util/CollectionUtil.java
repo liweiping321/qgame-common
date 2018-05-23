@@ -1,6 +1,7 @@
 package com.mokylin.util;
 
 import com.alibaba.fastjson.util.TypeUtils;
+import com.mokylin.cfg.BaseCfg;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -106,5 +107,7 @@ public class CollectionUtil {
     public static boolean isEmpty(Map<?,?> map){
         return map==null||map.isEmpty();
     }
+
+
 
 }

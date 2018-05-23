@@ -20,4 +20,9 @@ public @interface Cfg {
      * @return
      */
     String config();
+
+    /**
+     *是否需要配置数据
+     */
+    boolean needConfig() default false;
 }
