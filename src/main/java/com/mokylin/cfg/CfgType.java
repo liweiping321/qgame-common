@@ -91,6 +91,7 @@ public class CfgType<T extends BaseCfg> {
             Object value = cfgFieldType.field.get(src);
             cfgFieldType.field.set(dest, value);
         }
+        ((BaseCfg) dest).configValue = ((BaseCfg) src).configValue;
     }
     public CfgFieldType getCfgFieldType(String name){
         return fieldMap.get(name);
