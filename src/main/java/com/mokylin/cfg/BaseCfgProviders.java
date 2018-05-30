@@ -20,7 +20,7 @@ public abstract class BaseCfgProviders {
 
 
     public BaseCfgProviders() {
-        init();
+       // init();
     }
 
     protected void register(BaseCfgProvider<?, ?> provider) {
@@ -28,7 +28,7 @@ public abstract class BaseCfgProviders {
 
     }
 
-    private void init() {
+    public void init() {
 
         registers();
 

@@ -100,6 +100,7 @@ public abstract class BaseCfgProvider<Key, V extends BaseCfg<Key, ?>> {
         }
         for (V v : mapData.values()) {
             afterLoad(v);
+            v.configValue=null;
         }
 
         afterLoadAll();
