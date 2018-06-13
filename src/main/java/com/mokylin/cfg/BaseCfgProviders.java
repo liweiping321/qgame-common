@@ -18,9 +18,11 @@ public abstract class BaseCfgProviders {
 
     protected Map<Class<? extends BaseCfgProvider>, BaseCfgProvider<?, ?>> clazzProviderMap = new LinkedHashMap<>();
 
+    protected CfgHotReload hotReload;
 
     public BaseCfgProviders() {
        // init();
+        hotReload=new CfgHotReload(this);
     }
 
     protected void register(BaseCfgProvider<?, ?> provider) {
@@ -69,10 +71,6 @@ public abstract class BaseCfgProviders {
             }
         }
 
-    }
-
-    public <T extends BaseCfgProvider> T getProvider(Class<T> providerClazz){
-        return (T)clazzProviderMap.get(providerClazz);
     }
 
 

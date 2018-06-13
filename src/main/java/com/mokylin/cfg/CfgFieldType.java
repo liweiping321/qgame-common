@@ -57,7 +57,6 @@ public class CfgFieldType {
         this.splitRex1 = cfgField.splitRex1();
         this.array = cfgField.array();
         this.field = field;
-        this.field.setAccessible(true);
         this.fieldType = field.getType();
         this.defaultValue = cfgField.defaultValue();
         this.required = cfgField.required();
