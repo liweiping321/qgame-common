@@ -11,6 +11,7 @@ import com.google.common.base.Splitter;
 import com.alibaba.fastjson.util.TypeUtils;
 import com.mokylin.cfg.anno.Cfg;
 import com.mokylin.consts.Splitable;
+import com.mokylin.util.ArrayUtil;
 import com.mokylin.util.ClassUtil;
 import com.mokylin.util.CollectionUtil;
 
@@ -154,7 +155,15 @@ public class PropertyConfigUtil {
             } else if (fileldType == Map.class) {
                 valueObj=  CollectionUtil.convertMap(value,(Class<?>) actualTypes[0], (Class<?>) actualTypes[1],Splitable.HUO,Splitable.JINGHAO);
             }
-        } else {
+        } else if(fileldType==int[].class){
+            valueObj= ArrayUtil.str2intArray(value);
+        }else if(fileldType==int[][].class){
+            valueObj= ArrayUtil.str2intArray2(value);
+        }else if(fileldType==long[].class){
+            valueObj= ArrayUtil.str2longArray(value);
+        }else if(fileldType==long[][].class){
+            valueObj=ArrayUtil.str2longArray(value);
+        }else {
             valueObj = TypeUtils.castToJavaBean(value, fileldType);
 
         }

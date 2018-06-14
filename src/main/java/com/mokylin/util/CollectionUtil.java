@@ -1,12 +1,16 @@
 package com.mokylin.util;
 
+import com.google.common.collect.Lists;
+
 import com.alibaba.fastjson.util.TypeUtils;
 import com.mokylin.cfg.BaseCfg;
+import com.mokylin.consts.Splitable;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -100,6 +104,39 @@ public class CollectionUtil {
         return convertMap(content,Integer.class,Integer.class,splitRex,splitRex1);
     }
 
+    public static <K,V> Map<K,V> convertMap(String content,Class<K> keyType, Class<V> valueType){
+        return  convertMap(content,keyType,valueType, Splitable.HUO,Splitable.JINGHAO);
+    }
+    public static Map<Integer,Integer> convertMap(String content){
+        return convertMap(content,Integer.class,Integer.class, Splitable.HUO,Splitable.JINGHAO);
+    }
+
+    public static <T> List<T> convertList(String content,String splitRex, Class<T> castType){
+        List<String> lists= Arrays.asList(content.trim().split(splitRex));
+        return convertList(lists,castType);
+    }
+
+    public static <T> List<T> convertList(String content, Class<T> castType){
+        List<String> lists= Arrays.asList(content.trim().split(Splitable.HUO));
+        return convertList(lists,castType);
+    }
+
+    public static   List<Integer> convertList(String content ){
+        return convertList(content,Integer.class);
+    }
+    public static <T> Set<T> convertSet(String content,String splitRex, Class<T> castType){
+        List<String> lists= Arrays.asList(content.trim().split(splitRex));
+        return convertSet(lists,castType);
+    }
+
+    public static <T> Set<T> convertSet(String content, Class<T> castType){
+        List<String> lists= Arrays.asList(content.trim().split(Splitable.HUO));
+        return convertSet(lists,castType);
+    }
+
+    public static   Set<Integer> convertSet(String content){
+        return convertSet(content,Integer.class);
+    }
     public static boolean isEmpty(Collection<?> collections){
         return collections==null||collections.isEmpty();
     }
