@@ -84,12 +84,15 @@ public class PropertyConfigUtil {
      * @param clazz
      */
     private static void config(String path, Class<?> clazz) throws Exception {
-
-        try (FileInputStream fis = new FileInputStream(path);) {
+        FileInputStream fis =null;
+        try{
+            fis= new FileInputStream(path);
             Properties properties = new Properties();
             properties.load(new FileInputStream(path));
 
             toBeanObj(clazz, properties);
+        }finally {
+            fis.close();
         }
     }
 

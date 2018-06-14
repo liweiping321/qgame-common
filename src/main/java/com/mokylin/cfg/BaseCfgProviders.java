@@ -14,9 +14,7 @@ import java.util.Map;
  */
 public abstract class BaseCfgProviders {
 
-    protected Map<String, BaseCfgProvider<?, ?>> cfgProviderMap = new LinkedHashMap<>();
-
-    protected Map<Class<? extends BaseCfgProvider>, BaseCfgProvider<?, ?>> clazzProviderMap = new LinkedHashMap<>();
+    protected Map<String, BaseCfgProvider< ?>> cfgProviderMap = new LinkedHashMap<>();
 
     protected CfgHotReload hotReload;
 
@@ -25,7 +23,7 @@ public abstract class BaseCfgProviders {
         hotReload=new CfgHotReload(this);
     }
 
-    protected void register(BaseCfgProvider<?, ?> provider) {
+    protected void register(BaseCfgProvider< ?> provider) {
         cfgProviderMap.put(provider.getName(), provider);
 
     }
@@ -42,12 +40,12 @@ public abstract class BaseCfgProviders {
 
 
     public void loadData() {
-        for (BaseCfgProvider<?, ?> provider : cfgProviderMap.values()) {
+        for (BaseCfgProvider< ?> provider : cfgProviderMap.values()) {
             provider.reLoad();
             provider.loadEnd();
         }
 
-        for (BaseCfgProvider<?, ?> provider : cfgProviderMap.values()) {
+        for (BaseCfgProvider< ?> provider : cfgProviderMap.values()) {
             provider.printLoadOver();
         }
     }
@@ -55,7 +53,7 @@ public abstract class BaseCfgProviders {
     public void loadData(String names[]) {
         for (String table : names) {
 
-            BaseCfgProvider<?, ?> provider = cfgProviderMap.get(table);
+            BaseCfgProvider< ?> provider = cfgProviderMap.get(table);
             if (null != provider) {
                 provider.reLoad();
             }
@@ -63,7 +61,7 @@ public abstract class BaseCfgProviders {
 
         for (String table : names) {
 
-            BaseCfgProvider<?, ?> provider = cfgProviderMap.get(table);
+            BaseCfgProvider< ?> provider = cfgProviderMap.get(table);
             if (null != provider) {
                 provider.loadEnd();
 
@@ -72,7 +70,6 @@ public abstract class BaseCfgProviders {
         }
 
     }
-
 
     public void encode4Config( GeneratedMessage.Builder buidler ) {
         for (BaseCfgProvider provider : cfgProviderMap.values()) {

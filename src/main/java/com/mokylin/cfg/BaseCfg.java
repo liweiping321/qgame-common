@@ -13,11 +13,18 @@ import java.util.Set;
  * Created by liweiping on 2018/3/22.
  */
 public abstract class BaseCfg<Key, V> {
-
+    /**
+     * 数据类型时小心使用，性能会很差(封包、拆包)
+     * @return
+     */
     public  Key getKey(){
         return null;
     }
 
+
+    public int getIntKey(){
+        return (Integer)getKey();
+    }
     public Config configValue;
 
     public  GeneratedMessage encode4Config(){
