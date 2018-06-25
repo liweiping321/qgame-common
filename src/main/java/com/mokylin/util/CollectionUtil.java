@@ -26,7 +26,7 @@ import java.util.Set;
 public class CollectionUtil {
 
     public static <T> List<T> convertList(List<String> values, Class<T> castType) {
-        List<T> list = new ArrayList<>();
+        List<T> list = new ArrayList<>(values.size());
         if (CollectionUtils.isNotEmpty(values)) {
             for (String value : values) {
                 if (StringUtils.isBlank(value)) {
@@ -39,7 +39,7 @@ public class CollectionUtil {
     }
 
     public static <T> List<T> convertList(List<String> values, Class<T> castType,Object defautValue) {
-        List<T> list = new ArrayList<>();
+        List<T> list = new ArrayList<>(values.size());
         if (CollectionUtils.isNotEmpty(values)) {
             for (String value : values) {
                 if (StringUtils.isBlank(value)) {
