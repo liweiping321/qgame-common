@@ -121,7 +121,7 @@ public class PropertyConfigUtil {
             }
             String key = field.getName().toLowerCase();
             if (!properties.containsKey(key)) {
-                LOGGER.warn("{} file   not config property {}", key);
+                LOGGER.warn("field:{}    not config property:{}",field.getName(), key);
                 continue;
             }
 

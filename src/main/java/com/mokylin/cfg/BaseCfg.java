@@ -2,6 +2,7 @@ package com.mokylin.cfg;
 
 import com.google.protobuf.GeneratedMessage;
 
+import com.alibaba.fastjson.annotation.JSONField;
 import com.mokylin.game.utils.config.Config;
 
 import java.util.Date;
@@ -17,11 +18,12 @@ public abstract class BaseCfg<Key, V> {
      * 数据类型时小心使用，性能会很差(封包、拆包)
      * @return
      */
+    @JSONField(serialize = false,deserialize = false)
     public  Key getKey(){
         return null;
     }
 
-
+    @JSONField(deserialize = false,serialize = false)
     public int getIntKey(){
         return (Integer)getKey();
     }
