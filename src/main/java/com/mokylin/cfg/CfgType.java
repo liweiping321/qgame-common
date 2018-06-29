@@ -25,7 +25,7 @@ public class CfgType<T extends BaseCfg> {
 
     private String fileName;
 
-    private Map<String, CfgFieldType> fieldMap = new HashMap<>();
+    private Map<String, CfgFieldType> fieldMap;
 
     public  boolean needConfig;
 
@@ -44,6 +44,7 @@ public class CfgType<T extends BaseCfg> {
             needConfig=cfg.needConfig();
 
             Field[] fields = clazz.getDeclaredFields();
+            fieldMap = new HashMap<>(fields.length);
             for (Field field : fields) {
                 CfgField cfgField = field.getAnnotation(CfgField.class);
                 if (Objects.nonNull(cfgField)) {
@@ -61,7 +62,7 @@ public class CfgType<T extends BaseCfg> {
                         StringUtils.isNotEmpty(cfgField.name()) ? cfgField.name() : field.getName();
                     CfgFieldType cfgFieldType = new CfgFieldType(fieldName, cfgField, field);
 
-                    fieldMap.put(fieldName, cfgFieldType);
+                    fieldMap.put(fieldName.toLowerCase(), cfgFieldType);
                 }
             }
         } else {
