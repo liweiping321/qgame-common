@@ -24,6 +24,8 @@ public abstract class RequestHandler {
     public int msgCode;
     /**模块ID*/
     public int moduleId;
+    /**是否需要进入场景*/
+    public boolean needEnterScene;
 
     protected RequestHandler() {
 

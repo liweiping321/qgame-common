@@ -82,6 +82,7 @@ public class HandlerManager {
         requestHandler.msgIntervalTime = handler.intervalTime();
         requestHandler.msgCode = handler.code();
         requestHandler.moduleId = handler.code() / 1000;
+        requestHandler.needEnterScene=handler.needEnterScene();
         return requestHandler;
     }
 

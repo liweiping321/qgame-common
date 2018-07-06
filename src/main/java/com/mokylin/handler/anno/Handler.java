@@ -25,7 +25,7 @@ public @interface Handler {
     /**消息发送的合法间隔时间**/
     int intervalTime() default 200;
     /**是否需要进入场景后调用*/
-    boolean  needEnterScene() default true;
+    boolean  needEnterScene() default false;
 
     /**
      *
