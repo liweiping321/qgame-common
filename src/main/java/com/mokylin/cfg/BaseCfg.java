@@ -73,7 +73,6 @@ public abstract class BaseCfg<Key, V> {
         return null;
     }
 
-
     public long defaultLong( long value) {
         return value;
     }
@@ -114,5 +113,7 @@ public abstract class BaseCfg<Key, V> {
     public Set<?> defaultSet(Set<?> value){
         return value;
     }
+
+
 
 }
