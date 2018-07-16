@@ -44,8 +44,8 @@ public abstract class BaseCfgProviders {
             provider.reLoad();
             provider.loadEnd();
         }
-
         for (BaseCfgProvider< ?> provider : cfgProviderMap.values()) {
+
             provider.printLoadOver();
         }
     }
@@ -56,6 +56,8 @@ public abstract class BaseCfgProviders {
             BaseCfgProvider< ?> provider = cfgProviderMap.get(table);
             if (null != provider) {
                 provider.reLoad();
+                provider.loadEnd();
+
             }
         }
 
@@ -63,18 +65,20 @@ public abstract class BaseCfgProviders {
 
             BaseCfgProvider< ?> provider = cfgProviderMap.get(table);
             if (null != provider) {
-                provider.loadEnd();
-
                 provider.printLoadOver();
             }
         }
-
+        notifyChange();
     }
+
+    protected abstract void notifyChange();
 
     public void encode4Config( GeneratedMessage.Builder buidler ) {
         for (BaseCfgProvider provider : cfgProviderMap.values()) {
             provider.encode4Config(buidler);
         }
     }
+
+
 
 }

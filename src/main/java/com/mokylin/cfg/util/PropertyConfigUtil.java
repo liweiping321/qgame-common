@@ -9,6 +9,7 @@ package com.mokylin.cfg.util;
 import com.google.common.base.Splitter;
 
 import com.alibaba.fastjson.util.TypeUtils;
+import com.mokylin.cfg.IParser;
 import com.mokylin.cfg.anno.Cfg;
 import com.mokylin.consts.Splitable;
 import com.mokylin.util.ArrayUtil;
@@ -163,6 +164,8 @@ public class PropertyConfigUtil {
             valueObj= ArrayUtil.str2longArray(value);
         }else if(fileldType==long[][].class){
             valueObj=ArrayUtil.str2longArray(value);
+        }else if(hasInterface(fileldType,IParser.class)){
+            valueObj=IParser.defaultParse(value,fileldType);
         }else {
             valueObj = TypeUtils.castToJavaBean(value, fileldType);
 
@@ -170,5 +173,15 @@ public class PropertyConfigUtil {
 
         return valueObj;
     }
-
+   public static boolean hasInterface(Class<?> type,Class<?> interfaceType){
+       Class<?>[]  interfaces= type.getInterfaces();
+       if(interfaces!=null){
+           for(Class<?> clazz:interfaces){
+               if(clazz==interfaceType){
+                   return true;
+               }
+           }
+       }
+       return false;
+   }
 }
